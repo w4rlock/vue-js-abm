@@ -45,7 +45,12 @@ function post(req, res) {
   }
 
 	model.save(req.body).then((id) => {
-    res.json({ id: id });
+    if (!id) {
+      res.status(500).json({ err: 'DUPLICATE_NAME' });
+    }
+    else{
+      res.json({ id: id });
+    }
   }).catch((err) => {
     res.status(500).json({ err: err});
   });
