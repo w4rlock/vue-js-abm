@@ -87,7 +87,7 @@ export default {
           mdl-textfield(floating-label, label='Name', :value.sync='model.name', v-else)
           mdl-textfield(floating-label, label='Screen Name', :value.sync='model.screen_name') 
           mdl-textfield(floating-label, label='Type', :value.sync='model.type') 
-          mdl-textfield(floating-label, label='Img Url', :value.sync='model.profile_image_url') 
+          mdl-textfield(floating-label, label='Img Url', :value.sync='model.profile_image_url', type='url') 
         .mdl-cell.mdl-cell--9-col.mdl-cell--8-col-tablet.black
           img(v-bind:src='model.profile_image_url')
 </template>
