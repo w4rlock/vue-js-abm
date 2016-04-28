@@ -88,7 +88,7 @@ html
       list(v-ref:list,v-on:clicknew='clicknew', v-on:clickopen='clickopen')
 
     .center
-      .modal(v-if='showNewForm')
-        createfrm(v-ref:createfrm,v-on:clickcancel="clickcancel")
+      .modal(v-show='showNewForm')
+        createfrm(v-ref:createfrm,v-on:clickcancel='clickcancel')
 
 </template>
