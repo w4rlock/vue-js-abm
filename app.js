@@ -9,8 +9,8 @@ let express = require('express')
 require('./conf/express')(app);
 
 //app.use('/', routes);
-app.use('/users', users);
-app.use('/wags', wags);
+app.use('/api/users', users);
+app.use('/api/wags', wags);
 
 require('./middlwares/error')(app)
 app.set('port', process.env.PORT || 3000);
