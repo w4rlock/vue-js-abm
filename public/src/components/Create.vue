@@ -17,7 +17,9 @@ export default {
         name: null,
         screen_name: null,
         type:null,
-        profile_image_url:null
+        query:null,
+        profile_image_url:null,
+        profile_banner_url:null
       }
 		}
   },
@@ -92,12 +94,18 @@ export default {
           h4.err(v-show='error') {{ error }}
           div(v-if='model.id')
             h3 {{ model.name }}
+
           mdl-textfield(floating-label, label='Name', :value.sync='model.name', v-else)
           mdl-textfield(floating-label, label='Screen Name', :value.sync='model.screen_name') 
           mdl-textfield(floating-label, label='Type', :value.sync='model.type') 
-          mdl-textfield(floating-label, label='Img Url', :value.sync='model.profile_image_url', type='url') 
-        .mdl-cell.mdl-cell--9-col.mdl-cell--8-col-tablet.black
-          img(v-bind:src='model.profile_image_url')
+          mdl-textfield(floating-label, label='Query', :value.sync='model.query') 
+
+          img.profile(v-bind:src='model.profile_image_url')
+          mdl-textfield(floating-label, label='Img url', :value.sync='model.profile_image_url', type='url') 
+
+          img.banner(v-bind:src='model.profile_banner_url')
+          mdl-textfield(floating-label, label='Background url', :value.sync='model.profile_banner_url', type='url') 
+
 </template>
 
 <style lang='stylus'>
@@ -114,4 +122,13 @@ export default {
 
 .err
   color red
+
+img.profile
+  width 90px
+  height 110px
+
+img.banner
+  width 390px
+  height 170px
+  
 </style>
