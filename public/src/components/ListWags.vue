@@ -108,7 +108,7 @@ table
 					mdl-button(@click='clickOpen', v-mdl-ripple-effect, raised, primary v-show='this.checks.length == 1')
 						i.material-icons mode_edit
 
-					mdl-button(@click='clickDelete', v-mdl-ripple-effect, raised, primary, v-show='this.checks.length == 1')
+					mdl-button(@click='clickDelete', v-mdl-ripple-effect, raised, primary, v-show='this.checks.length > 0')
 						i.material-icons delete
 
 					mdl-button(@click='clickRefresh', v-mdl-ripple-effect, raised, primary)
