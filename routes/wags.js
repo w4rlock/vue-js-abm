@@ -13,6 +13,7 @@ router.delete('/:id', remove);
 function remove(req, res) {
   if (!req.params.id){
     res.status(500).json({ err: 'PARAM_ID_REQUIRED' }); 
+    return;
   }
 
 	model.remove(req.params.id).then((k) => {
@@ -26,6 +27,7 @@ function remove(req, res) {
 function update(req, res) {
   if (!validate(req.body) || !req.body.id){
     res.status(500).json({ err: 'ALL_FIELDS_REQUIRED' }); 
+    return;
   }
 
 	model.update(req.body).then((id) => {
@@ -39,6 +41,7 @@ function update(req, res) {
 function post(req, res) {
   if (!validate(req.body)){
     res.status(500).json({ err: 'ALL_FIELDS_REQUIRED' }); 
+    return;
   }
 
 	model.save(req.body).then((id) => {

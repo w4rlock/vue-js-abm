@@ -21,6 +21,7 @@ export default {
 
     clickcancel(){
       this.showNewForm = !this.showNewForm
+      this.$refs.list.clickRefresh()
     },
 
 		clicknew(){
@@ -50,6 +51,8 @@ html
 .modal
   width: 70%
   z-index: 111
+  @media(max-width: 730px)
+    width 95%
 
 
 #app 
@@ -82,7 +85,7 @@ html
 <template lang='jade'>
   #app(@keydown.esc='closeNewForm')
     div(v-bind:class='{ blur8: showNewForm }')
-      list(v-on:clicknew='clicknew', v-on:clickopen='clickopen')
+      list(v-ref:list,v-on:clicknew='clicknew', v-on:clickopen='clickopen')
 
     .center
       .modal(v-show='showNewForm')

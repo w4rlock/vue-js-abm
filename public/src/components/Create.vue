@@ -12,6 +12,7 @@ export default {
   data () {
     return {
 		 	loading: false,
+      error: null,
       model: {
         name: null,
         screen_name: null,
@@ -27,11 +28,13 @@ export default {
 	methods: {
 		clickCancel(){
       this.model = {};
+      this.error = null;
 			this.$dispatch('clickcancel');
 		},
 
 
 		clickSave(){
+      this.error = null;
       this.loading = true;
       let method = this.model.id ? 'put' : 'post'
 
@@ -41,8 +44,11 @@ export default {
            this.clickCancel() 
         }, 900);
 
-      }, (err) => {
-        setTimeout(() => { this.loading = false; }, 900);
+      }, (er) => {
+        setTimeout(() => { 
+          this.error = er.data.err;
+          this.loading = false; 
+        }, 900);
       });
 		},
 
@@ -70,7 +76,8 @@ export default {
 </script>
 
 <template lang='jade'>
-  Loader(:show='loading')
+  .overlay-wrap(v-show='loading')
+    Loader(:show='true')
   .mdl-card.mdl-shadow--2dp.full
     .mdl-grid
       .mdl-cell.mdl-cell--12-col
@@ -82,6 +89,7 @@ export default {
             i.material-icons cloud_upload
 
         .mdl-cell.mdl-cell--12-col.mdl-cell--12-col-tablet.black
+          h4.err(v-show='error') {{ error }}
           div(v-if='model.id')
             h3 {{ model.name }}
           mdl-textfield(floating-label, label='Name', :value.sync='model.name', v-else)
@@ -93,6 +101,17 @@ export default {
 </template>
 
 <style lang='stylus'>
+.overlay-wrap
+  position absolute
+  z-index 113
+  width 70%
+  height 100%
+  @media(max-width: 730px)
+    width 95%
+
 .full
   width: 100%
+
+.err
+  color red
 </style>
