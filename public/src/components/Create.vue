@@ -60,16 +60,16 @@ export default {
     },
 		
 		
-		showFailPass(){
-			document.querySelector('#wrap_pass').className+= ' is-invalid';
-			document.querySelector('#wrap_repass').className+= ' is-invalid';
+		showFailPass(elem){
+			document.querySelector(elem).className+= ' is-invalid';
+			document.querySelector(elem).className+= ' is-invalid';
 		},
 
 
 
-		clearFail(){
-			document.querySelector('#wrap_repass').className = 
-			document.querySelector('#wrap_repass').className.replace(/is-invalid/g,'');
+		clearFail(elem){
+			document.querySelector(elem).className = 
+			document.querySelector(elem).className.replace(/is-invalid/g,'');
 		}
 	}
 

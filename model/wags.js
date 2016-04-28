@@ -55,17 +55,32 @@ Wags.getAll = () => {
 
 
 Wags.remove = (id) => {
+  return new Promise((res, rej) => {
+    Wags.getFullKey(id).then(dat => {
+
+      let fullkey = dat[1][0];
+      let name = fullkey.replace(/\w+:\w+:/, '');
+
+      return redis.wagDel(name, fullkey, K.members, (err, data) => {
+        if (err) throw err;
+        res(data);
+      });
+
+    });
+
+  });
+}
+
+
+
+Wags.getFullKey = (id) => {
   let key = K.entity
              .replace('$name', '*')
              .replace('$id', id);
 
-  console.log(key);
-
-  return new Promise((res, rej) => { 
-    redis.wagDel(key, K.members, (err, data) => {
-      if (err) throw new Error(err);
-      console.log(data);
-
+  return new Promise((res, rej) => {
+    redis.scan(0, 'MATCH', key, (err, data) => {
+      if (err) throw err;
       res(data);
     
     });

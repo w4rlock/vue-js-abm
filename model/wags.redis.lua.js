@@ -83,21 +83,14 @@ redis.defineCommand('wagGetAll',{
 
 
 redis.defineCommand('wagDel',{ 
-  numberOfKeys: 1,
+  numberOfKeys: 2,
   lua: ` 
-    local match_id = KEYS[1]
+    local name = KEYS[1]
+    local fullkey = KEYS[2]
     local group = ARGV[1]
-    local rows = redis.call('SCAN', 0, 'MATCH', match_id)
-    local fullkey = rows[2][1]
-
-    local pos = string.find(fullkey, ':', 5) + 1
-    local name = string.sub(fullkey, pos)
     
     redis.call("SREM", group, name) 
-    redis.call('DEL', fullkey) 
-
-    return  fullkey`
-
+    return redis.call('DEL', fullkey) `
 });
 
 }

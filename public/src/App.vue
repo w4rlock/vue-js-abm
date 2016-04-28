@@ -10,6 +10,7 @@ export default {
 
 	data() {
 		return {
+      transition: 'fade',
 			showNewForm: false
 		}
 	},
@@ -78,7 +79,6 @@ html
   top 7%
   left 0
   width 100%
-  
 
 </style>
 
@@ -88,7 +88,7 @@ html
       list(v-ref:list,v-on:clicknew='clicknew', v-on:clickopen='clickopen')
 
     .center
-      .modal(v-show='showNewForm')
+      .modal(v-if='showNewForm')
         createfrm(v-ref:createfrm,v-on:clickcancel="clickcancel")
 
 </template>

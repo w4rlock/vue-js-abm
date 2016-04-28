@@ -63,7 +63,7 @@ export default {
 		clickDelete(){
 			this.checks.forEach((i) => {
         let id = this.gridData[i].id;
-				http.delete(`/api/wags/${id}`, (res) => {}, (err) => {});
+				http.delete(`/api/wags/${id}`, null, (res) => {}, (err) => {});
 			});
 
       setTimeout(() => {
