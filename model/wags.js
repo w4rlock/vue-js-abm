@@ -58,7 +58,7 @@ Wags.remove = (id) => {
   return new Promise((res, rej) => {
     Wags.getFullKey(id).then(dat => {
 
-      let fullkey = dat[1][0];
+      let fullkey = dat;
       let name = fullkey.replace(/\w+:\w+:/, '');
 
       return redis.wagDel(name, fullkey, K.members, (err, data) => {
@@ -79,11 +79,30 @@ Wags.getFullKey = (id) => {
              .replace('$id', id);
 
   return new Promise((res, rej) => {
-    redis.scan(0, 'MATCH', key, (err, data) => {
-      if (err) throw err;
-      res(data);
+    console.log(key);
+    let stream = redis.scanStream({
+      match: key,
+      count: 1
+    });
+
+    let keys = [];
+    stream.on('data', (data) => {
+      if (data) {
+        data.forEach(k => {
+          if (k){
+            keys.push(k);
+          }
+        });
+      }
     
     });
+
+    stream.on('end', () => {
+      console.log(keys);
+      res(keys[0]);
+    
+    });
+
   });
 }
 
