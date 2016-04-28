@@ -1,11 +1,11 @@
 <script>
-import List from './components/ListWags'
-import Create from './components/Create'
+import list from './components/ListWags'
+import createfrm from './components/Create'
 
 export default {
   components: {
-		List,
-		Create,
+		list,
+		createfrm
   },
 
 	data() {
@@ -22,7 +22,12 @@ export default {
 
 		clicknew(){
 			this.showNewForm = !this.showNewForm
-		}
+		},
+
+    clickopen(wag){
+      this.showNewForm = !this.showNewForm
+      this.$refs.createfrm.open(wag)
+    }
 
 	}
 }
@@ -32,8 +37,12 @@ export default {
 html
   height: 100%
 
-.blur5
-  filter: blur(5px);
+.mdl-textfield
+  display block
+  width 500px
+
+.blur8
+  filter: blur(8px);
 
 .fullcenter
   position: absolute
@@ -63,10 +72,10 @@ html
 
 <template lang='jade'>
   #app
-    div(v-bind:class='{ blur5: showNewForm }')
-      list(v-on:clicknew='clicknew')
+    div(v-bind:class='{ blur8: showNewForm }')
+      list(v-on:clicknew='clicknew', v-on:clickopen='clickopen')
 
     .fullcenter(v-show='showNewForm')
-      create(v-on:clickcancel="clickcancel")
+      createfrm(v-ref:createfrm,v-on:clickcancel="clickcancel")
 
 </template>

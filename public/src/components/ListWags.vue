@@ -1,5 +1,4 @@
 <script>
-
 import Loader from './Loader.vue'
 import http from '../services/http'
 
@@ -8,7 +7,7 @@ export default {
 		Loader 
 	},
 
-	ready(){
+	created(){
 		this.loadData();
 	},
 
@@ -33,7 +32,7 @@ export default {
 					setTimeout(() => {
 						componentHandler.upgradeAllRegistered()
 						this.loading = false;
-					}, 100);
+					}, 500);
 
 				}, 
 				(err) => {
@@ -48,6 +47,14 @@ export default {
 		},
 
 
+		clickOpen(){
+      let pos = this.checks[0];
+      let w = this.gridData[pos];
+
+			this.$dispatch('clickopen', w);
+		},
+
+
 		clickNew(){
 			this.$dispatch('clicknew');
 		},
@@ -55,12 +62,13 @@ export default {
 
 		clickDelete(){
 			this.checks.forEach((i) => {
-				let id = this.gridData[i].id;
-
+        let id = this.gridData[i].id;
 				http.delete(`/api/wags/${id}`, (res) => {}, (err) => {});
 			});
 
-			this.loadData();
+      setTimeout(() => {
+        this.loadData();
+      }, 300);
 		},
 	}
 }
@@ -83,7 +91,7 @@ table
   width 100%
 
 .profile_img
-  width 40px
+  width 52px
   height 60px
 </style>
 
@@ -96,15 +104,21 @@ table
 
 					mdl-button(@click='clickNew', v-mdl-ripple-effect, raised, primary)
 						i.material-icons add
-					mdl-button(@click='clickDelete', v-mdl-ripple-effect, raised, primary)
+
+					mdl-button(@click='clickOpen', v-mdl-ripple-effect, raised, primary v-show='this.checks.length == 1')
+						i.material-icons mode_edit
+
+					mdl-button(@click='clickDelete', v-mdl-ripple-effect, raised, primary, v-show='this.checks.length == 1')
 						i.material-icons delete
+
 					mdl-button(@click='clickRefresh', v-mdl-ripple-effect, raised, primary)
 						i.material-icons refresh
 
 		.mdl-cell.mdl-cell--12-col
-			table.mdl-data-table.mdl-js-data-table.ml-table-striped.mdl-data-table--selectable.mdl-shadow--1dp
+			table.mdl-data-table.mdl-js-data-table.ml-table-striped.mdl-shadow--1dp
 				thead
 					tr
+						th.mdl-data-table__cell--non-numeric 
 						th.mdl-data-table__cell--non-numeric Name
 						th.mdl-data-table__cell--non-numeric Screen Name
 						th.mdl-data-table__cell--non-numeric Type
