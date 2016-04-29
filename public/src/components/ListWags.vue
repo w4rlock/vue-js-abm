@@ -98,7 +98,7 @@ table
 
 <template lang='jade'>
 	Loader(:show='loading')
-	.mdl-card.mdl-shadow--2dp.md-full-card
+	.mdl-card.md-full-card
 		.dl-card__actions.mdl-card--border.mdl-card-bottom
 				.mdl-cell.mdl-cell--12-col
 
@@ -119,6 +119,7 @@ table
 				thead
 					tr
 						th.mdl-data-table__cell--non-numeric 
+						th.mdl-data-table__cell--non-numeric Twitter ID
 						th.mdl-data-table__cell--non-numeric Name
 						th.mdl-data-table__cell--non-numeric Screen Name
 						th.mdl-data-table__cell--non-numeric Type
@@ -129,6 +130,7 @@ table
 						td
 							label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='lapp_chk-{{$index}}')
 								input.mdl-checkbox__input(id='lapp_chk-{{$index}}',type='checkbox',v-model='checks',value='{{ $index }}')
+						td.mdl-data-table__cell--non-numeric {{ wag.header_id }}
 						td.mdl-data-table__cell--non-numeric {{ wag.name }}
 						td.mdl-data-table__cell--non-numeric {{ wag.screen_name }}
 						td.mdl-data-table__cell--non-numeric {{ wag.type }}

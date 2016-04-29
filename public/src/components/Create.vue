@@ -18,6 +18,8 @@ export default {
         screen_name: null,
         type:null,
         query:null,
+        header_id: null,
+        header_text: null,
         profile_image_url:null,
         profile_banner_url:null
       }
@@ -44,13 +46,13 @@ export default {
         setTimeout(() => { 
            this.loading = false;
            this.clickCancel() 
-        }, 900);
+        }, 700);
 
       }, (er) => {
         setTimeout(() => { 
           this.error = er.data.err;
           this.loading = false; 
-        }, 900);
+        }, 700);
       });
 		},
 
@@ -99,11 +101,16 @@ export default {
           mdl-textfield(floating-label, label='Screen Name', :value.sync='model.screen_name') 
           mdl-textfield(floating-label, label='Type', :value.sync='model.type') 
           mdl-textfield(floating-label, label='Query', :value.sync='model.query') 
+          
+          .mt-50
+          mdl-textfield(floating-label, label='Header ID', :value.sync='model.header_id') 
+          mdl-textfield(floating-label, label='Header Text', :value.sync='model.header_text') 
 
+          .mt-50
           img.profile(v-bind:src='model.profile_image_url')
+          img.banner(v-bind:src='model.profile_banner_url')
           mdl-textfield(floating-label, label='Img url', :value.sync='model.profile_image_url', type='url') 
 
-          img.banner(v-bind:src='model.profile_banner_url')
           mdl-textfield(floating-label, label='Background url', :value.sync='model.profile_banner_url', type='url') 
 
 </template>
@@ -124,11 +131,14 @@ export default {
   color red
 
 img.profile
-  width 90px
-  height 110px
+  width 100px
+  height 120px
 
 img.banner
-  width 390px
-  height 170px
+  width 370px
+  height 120px
+  padding-left 27px
   
+.mt-50
+  margin-top 50px
 </style>
