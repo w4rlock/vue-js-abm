@@ -2,15 +2,13 @@
 
 let express = require('express')
 	, routes = require('./routes/index')
-	, users = require('./routes/user')
-	, wags = require('./routes/wags')
 	, app = express();
 
 require('./conf/express')(app);
 
 //app.use('/', routes);
-app.use('/api/users', users);
-app.use('/api/wags', wags);
+app.use('/api/users', require('./routes/user'));
+app.use('/api/wags', require('./routes/wags'));
 
 require('./middlwares/error')(app)
 app.set('port', process.env.PORT || 3000);

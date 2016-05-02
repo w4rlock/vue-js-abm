@@ -20,6 +20,7 @@ export default {
         query:null,
         header_id: null,
         header_text: null,
+        header_bkg_url: null,
         profile_image_url:null,
         profile_banner_url:null
       }
@@ -79,6 +80,39 @@ export default {
 }
 </script>
 
+<style lang='stylus'>
+.overlay-wrap
+  position absolute
+  z-index 113
+  width 70%
+  height 100%
+  @media(max-width: 730px)
+    width 95%
+
+.full
+	height 100%
+	width 100%
+	margin-bottom 40px
+
+.err
+  color red
+
+img.profile
+  width 100px
+  height 120px
+
+img.banner
+  width 370px
+  height 120px
+
+.pl-27
+	padding-left 27px
+  
+.mt-50
+  margin-top 50px
+</style>
+
+
 <template lang='jade'>
   .overlay-wrap(v-show='loading')
     Loader(:show='true')
@@ -103,42 +137,16 @@ export default {
           mdl-textfield(floating-label, label='Query', :value.sync='model.query') 
           
           .mt-50
+          img.banner(v-bind:src='model.header_bkg_url')
+          mdl-textfield(floating-label, label='Header Bkg', :value.sync='model.header_bkg_url') 
           mdl-textfield(floating-label, label='Header ID', :value.sync='model.header_id') 
           mdl-textfield(floating-label, label='Header Text', :value.sync='model.header_text') 
 
           .mt-50
           img.profile(v-bind:src='model.profile_image_url')
-          img.banner(v-bind:src='model.profile_banner_url')
+          img.banner.pl-27(v-bind:src='model.profile_banner_url')
           mdl-textfield(floating-label, label='Img url', :value.sync='model.profile_image_url', type='url') 
 
           mdl-textfield(floating-label, label='Background url', :value.sync='model.profile_banner_url', type='url') 
-
 </template>
 
-<style lang='stylus'>
-.overlay-wrap
-  position absolute
-  z-index 113
-  width 70%
-  height 100%
-  @media(max-width: 730px)
-    width 95%
-
-.full
-  width: 100%
-
-.err
-  color red
-
-img.profile
-  width 100px
-  height 120px
-
-img.banner
-  width 370px
-  height 120px
-  padding-left 27px
-  
-.mt-50
-  margin-top 50px
-</style>

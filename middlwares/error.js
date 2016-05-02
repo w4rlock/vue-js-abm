@@ -1,3 +1,5 @@
+'use strict';
+
 exports = module.exports = (app) => {
 	
 /// catch 404 and forward to error handler
@@ -12,7 +14,8 @@ app.use((req, res, next) => {
 // development error handler
 // will print stacktrace
 
-if (app.get('env') === 'development') {
+let mode = app.get('env') || '';
+if (mode.indexOf('devel') > -1) {
     app.use((err, req, res, next) => {
         res.status(err.status || 500);
         res.render('error', {

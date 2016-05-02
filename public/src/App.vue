@@ -55,7 +55,6 @@ html
   @media(max-width: 730px)
     width 95%
 
-
 #app 
   color: #2c3e50
   margin: 20px
@@ -70,6 +69,7 @@ html
 
 .mdl-button
   margin 3px
+  min-width: 50px
 
 .center
   display flex
